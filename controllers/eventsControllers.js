@@ -1,22 +1,17 @@
-const Event = require('../models/events');
+const Events = require('../models/events');
 const { ctrlWrapper, HttpError } = require('../helpers');
 
 const getAllEvents = async (req, res) => {
-  // const { _id: owner } = req.user;
-  // const { page = 1, limit = 10, favorite } = req.query;
-  // const skip = (page - 1) * limit;
-  const result = await Event.find();
-  // if (favorite) {
-  //   const favoriteFiltr = result.filter((contact) => contact.favorite === true);
-  //   return res.status(200).json(favoriteFiltr);
-  // }
+  const { page = 1, limit = 10 } = req.query;
+  const skip = (page - 1) * limit;
+  const result = await Events.find().skip(skip).limit(limit).populate();
 
   res.status(200).json(result);
 };
 
 const getOneEvents = async (req, res) => {
   const { id } = req.params;
-  const result = await Event.findById(id);
+  const result = await Events.findById(id);
   if (!result) {
     throw HttpError(404);
   }
@@ -25,7 +20,7 @@ const getOneEvents = async (req, res) => {
 
 const createEvents = async (req, res) => {
   const { _id: owner } = req.user;
-  const result = await Event.create({ ...req.body, owner });
+  const result = await Events.create({ ...req.body, owner });
   res.status(201).json(result);
 };
 

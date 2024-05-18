@@ -24,6 +24,6 @@ const eventSchema = new Schema({
 
 eventSchema.post('save', handleMongooseError);
 
-const Event = model('event', eventSchema);
+const Events = model('events', eventSchema);
 
-module.exports = Event;
+module.exports = Events;

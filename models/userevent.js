@@ -36,7 +36,7 @@ const registerEventSchema = Joi.object({
   survey: Joi.string().required(),
 });
 
-const UserEvent = model('userEvent', userEventSchema);
+const UserEvent = model('userevents', userEventSchema);
 
 module.exports = {
   UserEvent,
