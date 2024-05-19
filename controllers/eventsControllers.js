@@ -2,7 +2,7 @@ const Events = require('../models/events');
 const { ctrlWrapper, HttpError } = require('../helpers');
 
 const getAllEvents = async (req, res) => {
-  const { page = 1, limit = 10 } = req.query;
+  const { page = 1, limit = 12 } = req.query;
   const skip = (page - 1) * limit;
   const result = await Events.find().skip(skip).limit(limit).populate();
 
